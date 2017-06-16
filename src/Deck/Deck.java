@@ -45,9 +45,9 @@ public class Deck {
 //        for (Card card : deck) {
 //            System.out.println(card);
 //        }
-       Collections.shuffle(deck);
-        for (Card card : deck) {
-            System.out.println(card);
-        }
+       //Collections.shuffle(deck);
+        //for (Card card : deck) {
+          //  System.out.println(card);
+        //}
     }
 }

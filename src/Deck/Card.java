@@ -15,7 +15,7 @@ public class Card {
 
 	    @Override
 	    public String toString() {
-	        return (rank + " " + suit).toLowerCase();
+	        return (rank+"").toLowerCase();
 	    }
 
 	    @Override
