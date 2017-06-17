@@ -1,6 +1,5 @@
 package Casino;
 
-import java.security.GuardedObject;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,9 +19,9 @@ public class Play {
 	List<Card> deck = table.newdeck().getDeck();
 	Deck deck2 = new Deck();
 	boolean status3 = true;
-
-
+	
 	public void PlayGame() {
+		//Asks user if they would like to play and runs Game
 		Scanner input = new Scanner(System.in);
 		System.out.println("\nReady to play? y or n");
 
@@ -42,29 +41,29 @@ public class Play {
 
 	public void Game() {
 		Scanner input = new Scanner(System.in);
-		while(status3){
-		Dealer.shuffle(deck);
-		user.setHand(Dealer.deal(deck));
-		user.setHand(Dealer.deal(deck));
-		Dealer.setHand(Dealer.deal(deck));
-		Dealer.setHand(Dealer.deal(deck));
-		wincheck(Dealer.hand, Dealer);
-		wincheck(user.hand, user);
-		System.out.println("\nYour cards are " + user.getHand() + "\nWould you like a hit(1) or to stay(2)?");
-		HitStayPlayer(user);
-		if(status3==false){
-			break;
+		//Proceeds with Blackjack(Deals to Player and Dealer, Player continues to hit or stay, then Dealer does, with winchecks in between and after
+		while (status3) {
+			Dealer.shuffle(deck);
+			user.setHand(Dealer.deal(deck));
+			user.setHand(Dealer.deal(deck));
+			Dealer.setHand(Dealer.deal(deck));
+			Dealer.setHand(Dealer.deal(deck));
+			wincheck(Dealer.hand, Dealer);
+			wincheck(user.hand, user);
+			System.out.println("\nYour cards are " + user.getHand() + "\nWould you like a hit(1) or to stay(2)?");
+			HitStayPlayer(user);
+			if (status3 == false) {
+				break;
+			}
+			wincheck(user.hand, user);
+			HitStayDealer(Dealer);
+			status3 = false;
 		}
-		wincheck(user.hand, user);
-		HitStayDealer(Dealer);
-		status3=false;
-		}
-		
-		
+
 		FinalWinCheck(user.hand, Dealer.hand);
 
 	}
-
+	//This is asks the player to hit or stay depending on their total already
 	public void HitStayPlayer(Player player) {
 		Scanner input = new Scanner(System.in);
 		while (status == 0) {
@@ -90,23 +89,23 @@ public class Play {
 
 		}
 	}
-
+	//This runs for the dealer and hits(if 15 or under) or stay depending on their total already
 	public void HitStayDealer(Player player) {
 		while (status1 == 0) {
 			System.out.println("\nDealer's cards are " + player.getHand());
-			if(status1 ==0){
-			if (wincheck(player.hand, player) <= 17) {
-				option = 1;
-			} else {
-				option = 2;
+			if (status1 == 0) {
+				if (wincheck(player.hand, player) <= 15) {
+					option = 1;
+				} else {
+					option = 2;
 
-			}
+				}
 			}
 			switch (option) {
 			case 1:
 				player.setHand(Dealer.deal(deck));
 				wincheck(player.hand, player);
-				
+
 				if (status1 == 0) {
 					System.out.println("\nDealer's cards are " + player.getHand());
 				}
@@ -126,6 +125,7 @@ public class Play {
 	}
 
 	public int wincheck(List<Card> hand, Player player) {
+		///Checks to see if a player has busted and prints total
 		int total = 0;
 
 		for (int i = 0; i < hand.size(); i++) {
@@ -137,10 +137,10 @@ public class Play {
 		}
 
 		if (total > 21) {
-			System.out.println(player.toString() + " busted with the cards "+ player.getHand());
-			
+			System.out.println(player.toString() + " busted with the cards " + player.getHand());
+
 			status = 1;
-			status1=1;
+			status1 = 1;
 			status3 = false;
 		}
 
@@ -148,6 +148,7 @@ public class Play {
 	}
 
 	public int FinalWinCheck(List<Card> user, List<Card> dealer) {
+		//This the final check for a winner after both have elected to stay and not busted
 		int p1total = 0;
 		int pctotal = 0;
 
@@ -163,8 +164,7 @@ public class Play {
 		if (pctotal > 21) {
 			System.out.println("You have won");
 
-		}
-		else if (p1total > 21) {
+		} else if (p1total > 21) {
 			System.out.println("The computer has won");
 
 		}

@@ -12,42 +12,29 @@ import Deck.Rank;
 import Deck.Suit;
 
 public class Deck {
-	
-	
+	//Makes a new deck of 52 cards with gets and setters
 	private List<Card> deck = new ArrayList<>(52);
-	
-		
-       
 
-        public Deck() {
+	public Deck() {
 		super();
-		
-		
+
 	}
-		
-        public List<Card> getDeck() {
-			createDeck();
-        	return deck;
+
+	public List<Card> getDeck() {
+		createDeck();
+		return deck;
+	}
+
+	public void setDeck(List<Card> deck) {
+		this.deck = deck;
+	}
+
+	public void createDeck() {
+
+		for (Rank r : Rank.values()) {
+			for (Suit s : Suit.values()) {
+				deck.add(new Card(r, s));
+			}
 		}
-
-		public void setDeck(List<Card> deck) {
-			this.deck = deck;
-		}
-
-		public void createDeck(){
-        
-        for(Rank r : Rank.values()) {
-            for (Suit s : Suit.values()) {
-                deck.add(new Card(r, s));
-            }
-        }
-
-//        for (Card card : deck) {
-//            System.out.println(card);
-//        }
-       //Collections.shuffle(deck);
-        //for (Card card : deck) {
-          //  System.out.println(card);
-        //}
-    }
+	}
 }

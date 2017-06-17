@@ -3,9 +3,8 @@ package Casino;
 import Deck.*;
 import Player.*;
 
-
 public class Table {
-
+	//Creates a new table with a Deck
 	private Deck deck = new Deck();
 	
 	public Table() {
@@ -19,22 +18,6 @@ public class Table {
 		
 	}
 
-	
-	
-	
-	
-	}
-	
-
-
-
-//		for (Card card : deck) {
-//        System.out.println(card);
-//      }
-//      Collections.shuffle(deck);
-//      for (Card card : deck) {
-//          System.out.println(card);
-//      }
-//	}
+}
 	
 
