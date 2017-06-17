@@ -8,7 +8,6 @@ import Deck.*;
 
 public class Computer extends Player {
 	
-	
 	public void setHand(Card card) {
 		// TODO Auto-generated method stub
 		hand.add(card);
@@ -30,9 +29,11 @@ public class Computer extends Player {
 	}
 
 	public static Card deal(List<Card> deck) {
-		int rand = (int) (Math.random() * 52);
+		
+		
+		
 
-		return deck.remove(rand);
+		return deck.remove(0);
 
 	}
 
