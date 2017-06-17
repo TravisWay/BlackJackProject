@@ -7,7 +7,18 @@ import java.util.Map;
 import Deck.*;
 
 public class Computer extends Player {
-
+	
+	
+	public void setHand(Card card) {
+		// TODO Auto-generated method stub
+		hand.add(card);
+	}
+	
+	public List<Card> getHand() {
+		// TODO Auto-generated method stub
+		return super.getHand();
+	}
+	
 	public List<Card> shuffle(List<Card> toShuffle) {
 
 		Collections.shuffle(toShuffle);

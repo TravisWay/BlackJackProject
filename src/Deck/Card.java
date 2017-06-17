@@ -5,19 +5,28 @@ import Deck.Rank;
 import Deck.Suit;
 
 public class Card {
-	 private Rank rank;
-	    private Suit suit;
-
+	 public Rank rank;
+	    public Suit suit;
+	    public int value;
 	    public Card(Rank r, Suit s) {
 	        rank = r;
 	        suit = s;
+	        setValue();
 	    }
 
 	    @Override
 	    public String toString() {
 	        return (rank+"").toLowerCase();
 	    }
-
+	    public void setValue(){
+	    	value = rank.getValue();
+	    	
+	    }
+	    public int getValue(){
+	    	return value;
+	    	
+	    	
+	    }
 	    @Override
 	    public int hashCode() {
 	        final int prime = 31;
