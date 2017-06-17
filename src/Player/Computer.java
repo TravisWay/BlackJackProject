@@ -55,5 +55,12 @@ public class Computer extends Player {
 		
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Computer");
+		return builder.toString();
+	}
+
 
 }

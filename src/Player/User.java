@@ -31,4 +31,11 @@ public class User extends Player{
 		
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("You");
+		return builder.toString();
+	}
+
 }
