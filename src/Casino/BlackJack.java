@@ -30,7 +30,9 @@ public class BlackJack {
 		System.out.println("Hit or GTFO: \nThe BlackJack Game");
 		while(!gameover){
 		if(deck.size()<10){
+			deck.clear();
 			deck = table.newdeck().getDeck();
+			
 		}
 		status3 =true;
 		user.hand.clear();
