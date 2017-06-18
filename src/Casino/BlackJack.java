@@ -101,7 +101,8 @@ public class BlackJack {
 				status = 1;
 				break;
 			case 3:
-				System.out.println(deck);
+				System.out.println("SHHHHHHH the next card dealt would be a "+deck.get(0)+ "  SHHHHHHH");
+				System.out.println("Now.....Would you like a hit(1) or to stay(2)?");
 				break;
 			default:
 				status = 1;
