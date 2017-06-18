@@ -20,6 +20,9 @@ public class Play {
 	Computer Dealer = new Computer();
 	User user = new User();
 	boolean status3 = true;
+	boolean blackjack =false;
+	int userscore=0;
+	int computer=0;
 
 	public void PlayGame() {
 		// Asks user if they would like to play and runs Game
@@ -32,13 +35,14 @@ public class Play {
 		Dealer.hand.clear();
 		status1=0;
 		status=0;
+		blackjack =false;
 		
-		System.out.println("\nReady to play? y or n");
+		System.out.println("\nReady to play? 1 for yes and 2 for no");
 
-		String answer = input.nextLine();
+		int answer = input.nextInt();
 
 		switch (answer) {
-		case "y":
+		case 1:
 			Game();
 			break;
 
@@ -62,6 +66,10 @@ public class Play {
 			Dealer.setHand(Dealer.deal(deck));
 			wincheck(Dealer.hand, Dealer);
 			wincheck(user.hand, user);
+			if(blackjack){
+				break;
+			}
+		
 			System.out.println("\nYour cards are " + user.getHand() + "\nWould you like a hit(1) or to stay(2)?");
 			HitStayPlayer(user);
 			if (status3 == false) {
@@ -71,9 +79,13 @@ public class Play {
 			HitStayDealer(Dealer);
 			status3 = false;
 		}
-
+	
+		if(blackjack){
+			System.out.println("Game over");
+		}
+		else{
 		FinalWinCheck(user.hand, Dealer.hand);
-
+		}
 	}
 
 	// This is asks the player to hit or stay depending on their total already
@@ -144,10 +156,26 @@ public class Play {
 		int newtotal =0;
 		int total = 0;
 		Card card;
+		
 		for (int i = 0; i < hand.size(); i++) {
 			card = hand.get(i);
 			total = total + card.getValue();
 		}
+		if(total==21 && (hand.size() ==2)){
+			System.out.println(player + " Blackjack!!");
+			
+			status = 1;
+			status1 = 1;
+			status3 = false;
+			blackjack = true;
+			if(player == user){
+				userscore++;
+			}
+			else{
+				computer++;
+			}
+		}
+		
 		if (player == user) {
 			System.out.println(player.toString() + "r total is " + total);
 		}
@@ -179,7 +207,10 @@ public class Play {
 		// not busted
 		int p1total = 0;
 		int pctotal = 0;
-
+		if(!blackjack){
+			
+			
+		
 		for (int i = 0; i < user.size(); i++) {
 			Card card = user.get(i);
 			p1total = p1total + card.getValue();
@@ -191,25 +222,32 @@ public class Play {
 		}
 		if (pctotal > 21) {
 			System.out.println("You have won");
+			userscore++;
 
 		} else if (p1total > 21) {
 			System.out.println("The computer has won");
-
+			computer++;
 		}
 
 		else if (pctotal < p1total) {
 			System.out.println("You have " + p1total);
 			System.out.println("The Computer has " + pctotal);
 			System.out.println("You have won");
+			userscore++;
 		} else if (pctotal > p1total) {
 			System.out.println("You have " + p1total);
 			System.out.println("The Computer has " + pctotal);
 			System.out.println("The computer has won");
+			computer++;
 		} else {
 			System.out.println("You have " + p1total);
 			System.out.println("The Computer has " + pctotal);
 			System.out.println("The game is a push");
 		}
+		}
+	
+		System.out.println("Games won by user = "+ userscore+"\nGames won by the computer = " + computer);
+		
 		status = 1;
 		return status;
 	}
