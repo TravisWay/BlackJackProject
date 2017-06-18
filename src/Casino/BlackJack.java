@@ -32,6 +32,7 @@ public class BlackJack {
 			if (deck.size() < 10) {
 				deck.clear();
 				deck = table.newdeck().getDeck();
+				Dealer.shuffle(deck);
 
 			}
 			status3 = true;
@@ -40,6 +41,7 @@ public class BlackJack {
 			status1 = 0;
 			status = 0;
 			blackjack = false;
+			Dealer.shuffle(deck);
 			System.out.println("\n" + deck.size() + " cards left in this deck");
 			System.out.println("\nDeal? 1 for yes and 2 for no");
 			int answer = input.nextInt();
@@ -60,7 +62,6 @@ public class BlackJack {
 		// Proceeds with Blackjack(Deals to Player and Dealer, Player continues
 		// to hit or stay, then Dealer does, with winchecks in between and after
 		while (status3) {
-			Dealer.shuffle(deck);
 			user.setHand(Dealer.deal(deck));
 			user.setHand(Dealer.deal(deck));
 			Dealer.setHand(Dealer.deal(deck));
