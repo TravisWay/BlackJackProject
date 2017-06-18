@@ -24,7 +24,7 @@ public class User extends Player {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("You");
+		builder.append("User");
 		return builder.toString();
 	}
 

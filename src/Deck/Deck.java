@@ -21,7 +21,6 @@ public class Deck {
 	}
 
 	public List<Card> getDeck() {
-		createDeck();
 		return deck;
 	}
 

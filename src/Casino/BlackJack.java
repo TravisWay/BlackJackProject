@@ -10,13 +10,12 @@ import Player.Computer;
 import Player.Player;
 import Player.User;
 
-public class Play {
+public class BlackJack {
 	int option;
 	int status = 0;
 	int status1 = 0;
 	Table table = new Table();
 	List<Card> deck = table.newdeck().getDeck();
-	Deck deck2 = new Deck();
 	Computer Dealer = new Computer();
 	User user = new User();
 	boolean status3 = true;
@@ -24,20 +23,23 @@ public class Play {
 	int userscore=0;
 	int computer=0;
 
-	public void PlayGame() {
+	void playBlackJack() {
 		// Asks user if they would like to play and runs Game
 		Scanner input = new Scanner(System.in);
 		boolean gameover = false;
-		System.err.println("Hit or GTFO \n\nThe BlackJack Game for the Ballsy\n");
+		System.out.println("Hit or GTFO: \nThe BlackJack Game");
 		while(!gameover){
+		if(deck.size()<10){
+			deck = table.newdeck().getDeck();
+		}
 		status3 =true;
 		user.hand.clear();
 		Dealer.hand.clear();
 		status1=0;
 		status=0;
 		blackjack =false;
-		
-		System.out.println("\nReady to play? 1 for yes and 2 for no");
+		System.out.println(deck.size());
+		System.out.println("\nDeal? 1 for yes and 2 for no");
 
 		int answer = input.nextInt();
 
@@ -79,13 +81,8 @@ public class Play {
 			HitStayDealer(Dealer);
 			status3 = false;
 		}
-	
-		if(blackjack){
-			System.out.println("Game over");
-		}
-		else{
 		FinalWinCheck(user.hand, Dealer.hand);
-		}
+		
 	}
 
 	// This is asks the player to hit or stay depending on their total already
@@ -162,7 +159,7 @@ public class Play {
 			total = total + card.getValue();
 		}
 		if(total==21 && (hand.size() ==2)){
-			System.out.println(player + " Blackjack!!");
+			System.out.println(player + " has Blackjack!!");
 			
 			status = 1;
 			status1 = 1;
@@ -177,13 +174,13 @@ public class Play {
 		}
 		
 		if (player == user) {
-			System.out.println(player.toString() + "r total is " + total);
+			System.out.println(player.toString() + " total is " + total);
 		}
 
 		if (total > 21) {
 			boolean acecheck = Ace(hand);
 			if (acecheck) {
-				System.out.println(player.toString() + "r ace value has changed to 1");
+				System.out.println(player.toString() + " ace value has changed to 1");
 				for (int i = 0; i < hand.size(); i++) {
 					card = hand.get(i);
 					newtotal = newtotal + card.getValue();
@@ -246,7 +243,7 @@ public class Play {
 		}
 		}
 	
-		System.out.println("Games won by user = "+ userscore+"\nGames won by the computer = " + computer);
+		System.out.println("\nGames won by user = "+ userscore+"\nGames won by the computer = " + computer);
 		
 		status = 1;
 		return status;
