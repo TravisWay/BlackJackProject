@@ -1,5 +1,5 @@
 package Deck;
 
 public enum Suit {
-    H, S, C, D
+    Hearts, Spades, Clubs, Diamonds
 }
