@@ -61,7 +61,6 @@ public class BlackJack {
 		// to hit or stay, then Dealer does, with winchecks in between and after
 		while (status3) {
 			Dealer.shuffle(deck);
-			System.out.println(deck);
 			user.setHand(Dealer.deal(deck));
 			user.setHand(Dealer.deal(deck));
 			Dealer.setHand(Dealer.deal(deck));
@@ -100,6 +99,9 @@ public class BlackJack {
 				break;
 			case 2:
 				status = 1;
+				break;
+			case 3:
+				System.out.println(deck);
 				break;
 			default:
 				status = 1;
