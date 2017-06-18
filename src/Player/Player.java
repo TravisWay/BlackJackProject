@@ -7,7 +7,7 @@ import Deck.Card;
 
 public abstract class Player {
 
-	public List<Card> hand = new ArrayList<>(6);
+	public List<Card> hand = new ArrayList<>(10);
 
 	public List<Card> getHand() {
 		return hand;

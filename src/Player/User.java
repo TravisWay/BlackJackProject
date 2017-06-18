@@ -7,7 +7,6 @@ import Deck.*;
 public class User extends Player {
 	//User player is made with a hand for cards and stay actions
 	public void setHand(Card card) {
-
 		hand.add(card);
 	}
 
