@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import Deck.Card;
 import Deck.Deck;
+import Deck.Rank;
 import Player.Computer;
 import Player.Player;
 import Player.User;
@@ -13,16 +14,25 @@ public class Play {
 	int option;
 	int status = 0;
 	int status1 = 0;
-	Computer Dealer = new Computer();
-	User user = new User();
 	Table table = new Table();
 	List<Card> deck = table.newdeck().getDeck();
 	Deck deck2 = new Deck();
+	Computer Dealer = new Computer();
+	User user = new User();
 	boolean status3 = true;
-	
+
 	public void PlayGame() {
-		//Asks user if they would like to play and runs Game
+		// Asks user if they would like to play and runs Game
 		Scanner input = new Scanner(System.in);
+		boolean gameover = false;
+		System.err.println("Hit or GTFO \n\nThe BlackJack Game for the Ballsy\n");
+		while(!gameover){
+		status3 =true;
+		user.hand.clear();
+		Dealer.hand.clear();
+		status1=0;
+		status=0;
+		
 		System.out.println("\nReady to play? y or n");
 
 		String answer = input.nextLine();
@@ -37,11 +47,13 @@ public class Play {
 			;
 
 		}
+		}
 	}
 
 	public void Game() {
 		Scanner input = new Scanner(System.in);
-		//Proceeds with Blackjack(Deals to Player and Dealer, Player continues to hit or stay, then Dealer does, with winchecks in between and after
+		// Proceeds with Blackjack(Deals to Player and Dealer, Player continues
+		// to hit or stay, then Dealer does, with winchecks in between and after
 		while (status3) {
 			Dealer.shuffle(deck);
 			user.setHand(Dealer.deal(deck));
@@ -63,7 +75,8 @@ public class Play {
 		FinalWinCheck(user.hand, Dealer.hand);
 
 	}
-	//This is asks the player to hit or stay depending on their total already
+
+	// This is asks the player to hit or stay depending on their total already
 	public void HitStayPlayer(Player player) {
 		Scanner input = new Scanner(System.in);
 		while (status == 0) {
@@ -89,7 +102,9 @@ public class Play {
 
 		}
 	}
-	//This runs for the dealer and hits(if 15 or under) or stay depending on their total already
+
+	// This runs for the dealer and hits(if 15 or under) or stay depending on
+	// their total already
 	public void HitStayDealer(Player player) {
 		while (status1 == 0) {
 			System.out.println("\nDealer's cards are " + player.getHand());
@@ -125,11 +140,12 @@ public class Play {
 	}
 
 	public int wincheck(List<Card> hand, Player player) {
-		///Checks to see if a player has busted and prints total
+		/// Checks to see if a player has busted and prints total
+		int newtotal =0;
 		int total = 0;
-
+		Card card;
 		for (int i = 0; i < hand.size(); i++) {
-			Card card = hand.get(i);
+			card = hand.get(i);
 			total = total + card.getValue();
 		}
 		if (player == user) {
@@ -137,18 +153,30 @@ public class Play {
 		}
 
 		if (total > 21) {
-			System.out.println(player.toString() + " busted with the cards " + player.getHand());
+			boolean acecheck = Ace(hand);
+			if (acecheck) {
+				System.out.println(player.toString() + "r ace value has changed to 1");
+				for (int i = 0; i < hand.size(); i++) {
+					card = hand.get(i);
+					newtotal = newtotal + card.getValue();
+				}
+				System.out.println("Your new total is " + newtotal);	
+			}
 
-			status = 1;
-			status1 = 1;
-			status3 = false;
+			else {
+				System.out.println(player.toString() + " busted with the cards " + player.getHand());
+
+				status = 1;
+				status1 = 1;
+				status3 = false;
+			}
 		}
-
 		return total;
 	}
 
 	public int FinalWinCheck(List<Card> user, List<Card> dealer) {
-		//This the final check for a winner after both have elected to stay and not busted
+		// This the final check for a winner after both have elected to stay and
+		// not busted
 		int p1total = 0;
 		int pctotal = 0;
 
@@ -184,6 +212,35 @@ public class Play {
 		}
 		status = 1;
 		return status;
+	}
+
+	boolean Ace(List<Card> hand) {
+		int total=0;
+		Card card;
+		boolean acecheck = false;
+		boolean acecheck1 = false;
+		
+		for (int i = 0; i < hand.size(); i++) {
+			card = hand.get(i);
+			if (card.rank == Rank.ACE) {
+				card.value = 1;
+				acecheck1=true;
+			}
+		}
+		for (int j = 0; j < hand.size(); j++) {
+				card = hand.get(j);
+				total = total + card.getValue();
+			}	
+		if(acecheck1 && total<21)	{
+			acecheck=true;
+			
+		}
+		else{
+			acecheck=false;
+		}
+		
+		return acecheck;
+
 	}
 
 }
