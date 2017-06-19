@@ -65,6 +65,7 @@ public class BlackJack {
 			user.setHand(Dealer.deal(deck));
 			user.setHand(Dealer.deal(deck));
 			Dealer.setHand(Dealer.deal(deck));
+			System.out.println("Dealer is showing "+ Dealer.hand);
 			Dealer.setHand(Dealer.deal(deck));
 			wincheck(Dealer.hand, Dealer);
 			wincheck(user.hand, user);
